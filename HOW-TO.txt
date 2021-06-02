@@ -1,0 +1,29 @@
+How to use the CREATE_FOLDERS program
+
+	1. Move your excel file with the Investor Names into the Folder -> InvestorNames
+	2. Edit the CREATE_FOLDERS file
+	3. Under "Enter excel file name here"
+		enter the EXACT name of the excel file including the file extension (eg. '.xlsx')
+	4. Under "Enter starting row (rowA) and ending row (rowB)" 
+		enter the row you want to start at and the row you want to end on
+	5. Under "Enter starting collumn (collumnA) and ending collumn (collumnB)" 
+		enter the collumn you want to start on and the collumn you want to end on
+		(collumn letters are replaced with numbers in this program starting with 1 instead of A, and collumns 1 through 3 will typically be used)
+	6. Save the file
+	7. Run the CREATE_FOLDERS file with PowerShell
+	8. Verify
+
+How to use the SORT program
+	
+	1. Copy all of the investor files you want to use into the "InvestorFiles" folder
+	2. Make sure all of your investor desired folders are in the "InvestorFolders" folder
+	3. Edit the SORT program
+	4. Under "Investor Fund Name" enter the EXACT investor fund name that is included in the investor files
+	5. Save the file
+	6. Run the SORT file with PowerShell
+	7. Verify
+
+How to use the PRINT program
+
+	1. Run the PRINT file with PowerShell (pages will be printed in folder and file order top down)
+	2. Verify printed pages
