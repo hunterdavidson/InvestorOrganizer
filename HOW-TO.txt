@@ -22,8 +22,3 @@ How to use the SORT program
 	5. Save the file
 	6. Run the SORT file with PowerShell
 	7. Verify
-
-How to use the PRINT program
-
-	1. Run the PRINT file with PowerShell (pages will be printed in folder and file order top down)
-	2. Verify printed pages

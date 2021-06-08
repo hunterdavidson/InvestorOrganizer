@@ -5,7 +5,7 @@ $InvestorFundName = "Investor Fund"
 
 
 foreach($folder in Get-ChildItem $workingDir\InvestorFolders) {
-    $currentInvestorName = $folder.ToString().Split("-", 2)[1].Trim()
+    $currentInvestorName = $folder.ToString().Split("- ", 2)[1]
 
     Get-ChildItem –Path $workingDir\InvestorFiles -Recurse -Filter *-$InvestorFundName-$currentInvestorName.pdf | Foreach-Object {Copy-Item $_.FullName -Destination $workingDir\InvestorFolders\$folder}
 }

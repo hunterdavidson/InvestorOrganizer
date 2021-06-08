@@ -13,7 +13,7 @@ $collumnB = 0
 $workingDir = Get-Location
 $excelObj = New-Object -ComObject Excel.Application
 $excelObj.Visible = $false
-$workBook = $excelObj.Workbooks.Open($workingDir+$file)
+$workBook = $excelObj.Workbooks.Open($workingDir+"\InvestorNames\"+$file)
 $workSheet = $workBook.sheets.Item(1)
 
 $folderName = ""
