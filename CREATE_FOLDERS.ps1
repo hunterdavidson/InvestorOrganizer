@@ -11,9 +11,9 @@ $collumnB = 0
 
 
 $workingDir = Get-Location
-$excelObj = New-Object -ComObject Excel.Application
-$excelObj.Visible = $false
-$workBook = $excelObj.Workbooks.Open($workingDir+"\InvestorNames\"+$file)
+$excel = New-Object -ComObject Excel.Application
+$excel.Visible = $false
+$workBook = $excel.Workbooks.Open($workingDir+"\InvestorNames\"+$file)
 $workSheet = $workBook.sheets.Item(1)
 
 $folderName = ""
@@ -42,6 +42,10 @@ for($i=$rowA;$i-le $rowB;$i++){
      New-Item -path InvestorFolders\$folderName -ItemType "directory"
      $folderName = ""
 }
+
+$excel.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel)
+Remove-Variable excel
 
 Write-Host "Folder Creation Completed"
 cmd /c 'pause'
