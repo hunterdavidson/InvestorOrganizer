@@ -1,13 +1,16 @@
 $workingDir = Get-Location
 
-####Investor Fund Name
-$InvestorFundName = "Investor Fund"
-
-
 foreach($folder in Get-ChildItem $workingDir\InvestorFolders) {
-    $currentInvestorName = $folder.ToString().Split("- ", 2)[1]
+   
+    if($folder.ToString() -match "placeholder") { continue }
+    $currentInvestorName = $folder.ToString().Split("-", 2)[1].Trim()
 
-    Get-ChildItem –Path $workingDir\InvestorFiles -Recurse -Filter *-$InvestorFundName-$currentInvestorName.pdf | Foreach-Object {Copy-Item $_.FullName -Destination $workingDir\InvestorFolders\$folder}
+    Get-ChildItem -Path $workingDir\InvestorFiles -Recurse -Filter *-$currentInvestorName.pdf | 
+        Foreach-Object {
+            if($_.FullName.ToString() -match "1st Amendment") { continue }
+            $_.FullName.ToString()
+            if($_.FullName.ToString() -match "Fully Executed") {Copy-Item $_.FullName -Destination $workingDir\InvestorFolders\$folder}
+            }
 }
 
 Write-Host "Sorting Completed"
