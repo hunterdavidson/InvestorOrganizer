@@ -1,19 +1,16 @@
-####Enter excel file name here
-$file = "Investor Excel File"
-
 ####Enter starting row (rowA) and ending row (rowB)
-$rowA = 0
-$rowB = 0
+$rowA = 192
+$rowB = 206
 
 ####Enter starting collumn (collumnA) and ending collumn (collumnB)
-$collumnA = 0
-$collumnB = 0
+$collumnA = 1
+$collumnB = 3
 
 
 $workingDir = Get-Location
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
-$workBook = $excel.Workbooks.Open($workingDir+"\InvestorNames\"+$file)
+$workBook = $excel.Workbooks.Open($workingDir.ToString()+"\InvestorNames\*.xlsx")
 $workSheet = $workBook.sheets.Item(1)
 
 $folderName = ""
@@ -39,7 +36,7 @@ for($i=$rowA;$i-le $rowB;$i++){
         }
     
      
-     New-Item -path InvestorFolders\$folderName -ItemType "directory"
+     New-Item -path $workingDir\InvestorFolders\$folderName -ItemType "directory"
      $folderName = ""
 }
 
