@@ -1,10 +1,10 @@
 ####Enter starting row (rowA) and ending row (rowB)
-$rowA = 192
-$rowB = 206
+$rowA = o
+$rowB = o
 
 ####Enter starting collumn (collumnA) and ending collumn (collumnB)
-$collumnA = 1
-$collumnB = 3
+$collumnA = 0
+$collumnB = 0
 
 
 $workingDir = Get-Location
