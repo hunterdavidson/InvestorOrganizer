@@ -1,16 +1,36 @@
 ####Enter starting row (rowA) and ending row (rowB)
-$rowA = o
-$rowB = o
+$rowA = 0
+$rowB = 0
 
 ####Enter starting collumn (collumnA) and ending collumn (collumnB)
 $collumnA = 0
 $collumnB = 0
 
+function End-Program {
+     $excel.Quit()
+     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel)
+     Remove-Variable excel
+
+     Write-Host "Folder Creation Completed"
+     cmd /c 'pause'
+}
+
+function Ask-Continue {
+     if (Read-Host "Press enter to continue or type 'exit' to exit." -eq "exit") {
+          End-Program
+     }
+}
 
 $workingDir = Get-Location
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
-$workBook = $excel.Workbooks.Open($workingDir.ToString()+"\InvestorNames\*.xlsx")
+
+try { $workBook = $excel.Workbooks.Open($workingDir.ToString()+"\InvestorNames\*.xlsx") }
+catch { 
+     Write-Host There was an error opening excel file at $workingDir.ToString()+"\InvestorNames\*.xlsx"
+     End-Program
+}
+
 $workSheet = $workBook.sheets.Item(1)
 
 $folderName = ""
@@ -23,6 +43,7 @@ for($i=$rowA;$i-le $rowB;$i++){
 
         if($folderName -eq "") {
             Write-Host Missing data at collumn [$a], row[$i]
+            Ask-Continue
         }
 
         if($a -lt $collumnB){
@@ -32,6 +53,7 @@ for($i=$rowA;$i-le $rowB;$i++){
 
      if($folderName -eq "") {
             Write-Host Missing data at row[$i] -> Folder not created
+            Ask-Continue
             continue
         }
     
@@ -40,9 +62,4 @@ for($i=$rowA;$i-le $rowB;$i++){
      $folderName = ""
 }
 
-$excel.Quit()
-[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel)
-Remove-Variable excel
-
-Write-Host "Folder Creation Completed"
-cmd /c 'pause'
+End-Program
