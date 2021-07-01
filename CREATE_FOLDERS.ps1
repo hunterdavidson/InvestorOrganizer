@@ -18,7 +18,7 @@ $excel.Visible = $false
 
 function End-Program {$excel.Quit()
      $excel.Quit()
-     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel)
+     $stop = [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel)
 
      Write-Host "Folder Creation Completed"
      cmd /c 'pause'
@@ -61,10 +61,7 @@ for($i=$rowA;$i-le $rowB;$i++){
     
      
      try { 
-        $NewItem = New-Item -path $workingDir\InvestorFolders\$folderName -ItemType "directory" -ErrorAction Ignore
-        if ($null -eq $NewItem) {
-            throw
-            }
+	New-Item -path $workingDir\InvestorFolders\$folderName -ItemType "directory" -ErrorAction Stop
         }
      catch {
 	    Write-Host Folder [$folderName] has already been created or could not be created because of an error
