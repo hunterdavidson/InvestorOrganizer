@@ -7,10 +7,13 @@ foreach($folder in Get-ChildItem $workingDir\InvestorFolders) {
 
     Get-ChildItem -Path $workingDir\InvestorFiles -Recurse -Filter *-$currentInvestorName.pdf | 
         Foreach-Object {
-            if($_.FullName.ToString() -match "1st Amendment") { continue }
-            $_.FullName.ToString()
-            if($_.FullName.ToString() -match "Fully Executed") {Copy-Item $_.FullName -Destination $workingDir\InvestorFolders\$folder}
-            }
+            if($_.FullName.ToString() -match "1st_Amendment") { 
+		         return
+		      }
+            if($_.FullName.ToString() -match "Fully Executed") { 
+		         Copy-Item $_.FullName -Destination $workingDir\InvestorFolders\$folder
+		      }
+	}
 }
 
 Write-Host "Sorting Completed"
